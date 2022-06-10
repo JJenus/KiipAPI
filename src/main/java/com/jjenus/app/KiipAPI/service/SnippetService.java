@@ -1,5 +1,7 @@
-package com.jjenus.app.KiipAPI.snippet;
+package com.jjenus.app.KiipAPI.service;
 
+import com.jjenus.app.KiipAPI.model.Snippet;
+import com.jjenus.app.KiipAPI.repository.SnippetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.jjenus.app.KiipAPI.snippet;
+package com.jjenus.app.KiipAPI.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,14 +17,8 @@ import java.time.LocalDateTime;
 
 public class Snippet {
     @Id
-    @SequenceGenerator(
-            name = "snippet_sequence",
-            sequenceName = "snippet_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "snippet_sequence"
+            strategy = GenerationType.AUTO
     )
     private Long id;
     private String title;

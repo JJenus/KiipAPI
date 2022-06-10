@@ -1,5 +1,7 @@
-package com.jjenus.app.KiipAPI.snippet;
+package com.jjenus.app.KiipAPI.controller;
 
+import com.jjenus.app.KiipAPI.model.Snippet;
+import com.jjenus.app.KiipAPI.service.SnippetService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
