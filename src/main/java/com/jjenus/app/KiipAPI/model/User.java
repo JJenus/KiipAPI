@@ -8,12 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
 public class User {
     @Id
     @GeneratedValue(
@@ -21,7 +18,8 @@ public class User {
     )
     private Long id;
     private String name;
-    private String username; //email;
+    @Column(name = "email")
+    private String email; //email;
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -32,6 +30,12 @@ public class User {
 
     @Column(nullable = false, name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
     @PrePersist
     public void onInsert(){

@@ -1,10 +1,15 @@
 package com.jjenus.app.KiipAPI;
 
+import com.jjenus.app.KiipAPI.model.Role;
+import com.jjenus.app.KiipAPI.model.User;
+import com.jjenus.app.KiipAPI.service.UserServiceImpl;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -36,6 +41,35 @@ public class KiipApiApplication {
 		UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
 		urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
 		return new CorsFilter(urlBasedCorsConfigurationSource);
+	}
+
+	@Bean
+	CommandLineRunner runner(UserServiceImpl userServiceImpl){
+		return args -> {
+			userServiceImpl.saveRole(new Role(null, "ROLE.USER"));
+			userServiceImpl.saveRole(new Role(null, "ROLE.ADMIN"));
+
+			userServiceImpl.saveUser(new User(
+					"Green", "g@gmail.com", "ggg"
+			));
+
+			userServiceImpl.saveUser(new User(
+					"Sammy Wilder", "wilder@gmail.com", "sam"
+			));
+
+			userServiceImpl.saveUser(new User(
+					"Gold Digger", "dee@gmail.com", "dee"
+			));
+
+			userServiceImpl.addRoleToUser("g@gmail.com", "ROLE.USER");
+			userServiceImpl.addRoleToUser("dee@gmail.com", "ROLE.USER");
+			userServiceImpl.addRoleToUser("wilder@gmail.com", "ROLE.USER");
+		};
+	}
+
+	@Bean
+	PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
 	}
 
 }
